@@ -16,12 +16,14 @@ class MovingDot():
         """sets the position of the top left corrner of the player rectangle"""
         self.player_rect=pygame.Rect(left, top, width, height)
 
-    def display_rect(self):        
-        pygame.draw.rect(self.screen, self.color, self.player_rect)
+    def display_rect(self, color, rect):        
+        pygame.draw.rect(self.screen, color, rect)
         
     def move_rect(self, x_step, y_step):
+        black_color=(0, 0, 0)
+        self.display_rect(black_color, self.player_rect)           
         self.player_rect=self.player_rect.move(x_step,y_step)
-        
+     
   
 def main():
     """this function is called when the program starts.
@@ -32,21 +34,21 @@ def main():
     screen = pygame.display.set_mode((800, 480))
     clock=pygame.time.Clock()
     dot_1=MovingDot(0, 0, 64, 64)
-    dot_1.set_pos_size(40,40,65,64)
-    dot_1.display_rect()
+    dot_1.set_pos_size(40,40,64,64)
+    dot_1.display_rect(dot_1.color, dot_1.player_rect)
     print(dot_1.player_rect)    
     # main loop
     while True: 
         # a clock keeps the frame rate under 60
-        clock.tick(1)
+        clock.tick(30)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        dot_1.move_rect(10,10)
+        dot_1.move_rect(1,1)
         print(dot_1.player_rect)
-        dot_1.display_rect()
+        dot_1.display_rect(dot_1.color, dot_1.player_rect)
         pygame.display.update()
     pygame.quit()
     
