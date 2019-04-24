@@ -7,23 +7,23 @@ an initial blank screen for a pygame video game
 import pygame
 import sys
 
-class MovingDot():
+class MovingShape():
     def __init__(self,left, top, width, height):
-        self.player_rect=pygame.Rect(left, top, width, height)
+        self.shape_rect=pygame.Rect(left, top, width, height)
         self.color=(255, 0, 0)
         self.screen = pygame.display.get_surface()
         print('screen', screen)
     def set_pos_size(self,left, top, width, height):
         """sets the position of the top left corrner of the player rectangle"""
-        self.player_rect=pygame.Rect(left, top, width, height)
+        self.shape_rect=pygame.Rect(left, top, width, height)
 
-    def display_rect(self, color, rect):        
+    def display_shape(self, color, rect):        
         pygame.draw.rect(self.screen, color, rect)
         
-    def move_rect(self, x_step, y_step):
+    def move_shape(self, x_move, y_move):
         black_color=(0, 0, 0)
-        self.display_rect(black_color, self.player_rect)           
-        self.player_rect=self.player_rect.move(x_step,y_step)
+        self.display_shape(black_color, self.shape_rect)           
+        self.shape_rect=self.shape_rect.move(x_move,y_move)
      
   
 def main():
@@ -32,13 +32,13 @@ def main():
        a loop until the function returns."""
     #Initialize Everything     
     pygame.init()
-    width, height = 800, 400
-    x_step, y_step = 3, 3
-    screen = pygame.display.set_mode((width, height))
+    screen_width, screen_height = 800, 400
+    x_move, y_move = 3, 3
+    screen = pygame.display.set_mode((screen_width, screen_height))
     clock=pygame.time.Clock()
-    dot_1=MovingDot(0, 0, 64, 64)
-    dot_1.set_pos_size(40,40,64,64)
-    dot_1.display_rect(dot_1.color, dot_1.player_rect)
+    shape_1=MovingShape(0, 0, 64, 64)
+    shape_1.set_pos_size(40,40,64,64)
+    shape_1.display_shape(shape_1.color, shape_1.shape_rect)
     # main loop
     while True: 
         # a clock keeps the frame rate under 60
@@ -48,15 +48,15 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        dot_1.move_rect(x_step,y_step)
-        dot_1.display_rect(dot_1.color, dot_1.player_rect)
+        shape_1.move_shape(x_move,y_move)
+        shape_1.display_shape(shape_1.color, shape_1.shape_rect)
         pygame.display.update()
         
-        pos=dot_1.player_rect
-        if pos.left < 0 or pos.right > width:
-            x_step = -x_step
-        if pos.top < 0 or pos.bottom > height:
-            y_step = -y_step        
+        rect_1=shape_1.shape_rect
+        if rect_1.left < 0 or rect_1.right > screen_width:
+            x_move = -x_move
+        if rect_1.top < 0 or rect_1.bottom > screen_height:
+            y_move = -y_move        
     pygame.quit()
     
 # game main loop
