@@ -8,17 +8,17 @@ import pygame
 import sys
 
 class MovingDot():
-    def __init__(self):
-        
-        self.rect_pos=(0, 0, 64, 64)
-        player_rect=pygame.Rect(self.rect_pos)
+    def __init__(self,left, top, width, height):
+        self.player_rect=pygame.Rect(left, top, width, height)
         self.color=(255, 0, 0)
-        screen = pygame.display.get_surface()
-        pygame.draw.rect(screen, self.color, player_rect)
-        
-    def get_size(self,left,top,width,height):
-        self.rect_pos=()
-        
+        self.screen = pygame.display.get_surface()
+                
+    def set_pos_size(self,left, top, width, height):
+        """sets the position of the top left corrner of the player rectangle"""
+        self.player_rect=pygame.Rect(left, top, width, height)
+
+    def display_rect(self):        
+        pygame.draw.rect(self.screen, self.color, self.player_rect)        
         
   
 def main():
@@ -38,7 +38,9 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        dot_1=MovingDot()
+        dot_1=MovingDot(0, 0, 64, 64)
+        dot_1.set_pos_size(40,40,300,100)
+        dot_1.display_rect()
         pygame.display.update()
     pygame.quit()
     
