@@ -10,6 +10,7 @@ import sys
 if not pygame.font: print ('Warning, fonts disabled')
 
 class MovingShape():
+    """Defines a rectangle shape."""
     def __init__(self,left, top, width, height):
         self.shape_rect=pygame.Rect(left, top, width, height)
         self.color=(255, 0, 0)
@@ -42,6 +43,8 @@ def main():
     background = pygame.Surface(screen.get_size())
     last_frame_rate=0
     clock=pygame.time.Clock()
+    
+    # creates a shape object from the MovingShape class
     shape_1=MovingShape(0, 0, 64, 64)
     shape_1.set_pos_size(40,40,64,64)
     shape_1.display_shape(shape_1.color, shape_1.shape_rect)
@@ -50,14 +53,13 @@ def main():
     while True: 
         # a clock keeps the frame rate to a fixed number
         clock.tick(480)
-
+        
+        #move the shape 1 step
         shape_1.move_shape(x_move,y_move)
         shape_1.display_shape(shape_1.color, shape_1.shape_rect)
-        
-
-        
         pygame.display.update()
-        
+
+        # reverse the shape when it colides with the screen walls       
         rect_1=shape_1.shape_rect
         if rect_1.left < 0 or rect_1.right > screen_width:
             x_move = -x_move
@@ -89,12 +91,10 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
-
-            
+          
     pygame.quit()
     
-# game main loop
+# Calls the main funcion
 if __name__=="__main__":
     main()
         
