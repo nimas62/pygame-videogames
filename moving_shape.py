@@ -16,6 +16,7 @@ class MovingShape():
         self.color=(255, 0, 0)
         self.screen = pygame.display.get_surface()
         print('screen', self.screen)
+        
     def set_pos_size(self,left, top, width, height):
         """sets the position of the top left corrner of the player rectangle."""
         self.shape_rect=pygame.Rect(left, top, width, height)
@@ -35,6 +36,7 @@ def main():
     """this function is called when the program starts.
        it initializes everything it needs, then runs in
        a loop until the function returns."""
+       
     #Initialize Everything     
     pygame.init()
     screen_width, screen_height = 800, 400
