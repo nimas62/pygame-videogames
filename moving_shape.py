@@ -1,7 +1,8 @@
 """
-an initial blank screen for a pygame video game
+A moving shape in a bounded screen.
 
-@author: Nima Created on Wed Apr 24 16:14:45 2019
+@author: Nima Sanjabi
+Created on Wed Apr 24 16:14:45 2019
 """
 
 import pygame
