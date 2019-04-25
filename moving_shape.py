@@ -18,7 +18,8 @@ class MovingShape():
         print('screen', self.screen)
         
     def set_pos_size(self,left, top, width, height):
-        """sets the position of the top left corrner of the player rectangle."""
+        """sets the position of the top left corrner of
+        the player rectangle."""
         self.shape_rect=pygame.Rect(left, top, width, height)
 
     def display_shape(self, color, rect):
@@ -26,7 +27,9 @@ class MovingShape():
         pygame.draw.rect(self.screen, color, rect)
         
     def move_shape(self, x_move, y_move):
-        """move the shape by x and y steps. Before each move, the previous position on the last frame is repainted()erased with black color."""
+        """move the shape by x and y steps. Before each 
+        move, the previous position on the last frame is
+        repainted()erased with black color."""
         black_color=(0, 0, 0)
         self.display_shape(black_color, self.shape_rect)           
         self.shape_rect=self.shape_rect.move(x_move,y_move)
@@ -69,7 +72,8 @@ def main():
             y_move = -y_move
   
         
-        # displays the real frame rate which might be different from the nominal frame rate.
+        # displays the real frame rate which might be different
+        from the nominal frame rate.
         if pygame.font:
             font = pygame.font.Font(None, 24)
             # erase the last text with black color
