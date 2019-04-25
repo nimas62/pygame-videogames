@@ -13,6 +13,9 @@ if not pygame.font: print ('Warning, fonts disabled')
 
 # game constants
 NOMINAL_FRAME_RATE = 12000
+SCREEN_WIDTH, SCREEN_HEIGHT = 480, 300
+SJAPE_WIDTH, SHAPE_HEIGHT = 64, 64
+
 BG_COLOR=(0, 0, 0)
 SHAPES_COLOR = (136, 187, 0)
 TEXT_COLOR = (17, 119, 136)
@@ -48,9 +51,8 @@ def main():
        
     #Initialize Everything     
     pygame.init()
-    screen_width, screen_height = 800, 400
     x_move, y_move = 1, 1
-    screen = pygame.display.set_mode((screen_width, screen_height))
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     
     background = pygame.Surface(screen.get_size())
     background.fill(BG_COLOR)
@@ -63,8 +65,8 @@ def main():
     clock=pygame.time.Clock()
     
     # creates a shape object from the MovingShape class
-    shape_1=MovingShape(0, 0, 64, 64)
-    shape_1.set_pos_size(40,40,64,64)
+    shape_1=MovingShape(0, 0, SJAPE_WIDTH, SHAPE_HEIGHT)
+    shape_1.set_pos_size(40,40,SJAPE_WIDTH,SHAPE_HEIGHT)
     shape_1.display_shape(shape_1.color, shape_1.shape_rect)
     
     # main loop
@@ -79,9 +81,9 @@ def main():
 
         # reverse the shape when it colides with the screen walls       
         rect_1=shape_1.shape_rect
-        if rect_1.left < 0 or rect_1.right > screen_width:
+        if rect_1.left < 0 or rect_1.right > SCREEN_WIDTH:
             x_move = -x_move
-        if rect_1.top < 0 or rect_1.bottom > screen_height:
+        if rect_1.top < 0 or rect_1.bottom > SCREEN_HEIGHT:
             y_move = -y_move
   
         
