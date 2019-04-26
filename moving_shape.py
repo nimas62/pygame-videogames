@@ -49,7 +49,7 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption('Bouncing square!')    
     background = pygame.Surface(screen.get_size())
-    textpos = pygame.Rect(10, 10, 140, 17)
+    textpos = pygame.Rect(10, 10, 160, 17)
     
     if pygame.font:
         font = pygame.font.Font(None, 24)
@@ -96,7 +96,7 @@ def main():
         screen.blit(background, (0, 0))
         screen.blit(text, textpos)
         allsprites.draw(screen)
-        pygame.display.flip()
+        pygame.display.update(textpos)
         
         # handles the exit event
         for event in pygame.event.get():
