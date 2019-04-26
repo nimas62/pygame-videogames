@@ -14,7 +14,7 @@ from pygame.compat import geterror
 if not pygame.font: print ('Warning, fonts disabled')
 
 # game constants
-NOMINAL_FRAME_RATE = 120
+NOMINAL_FRAME_RATE = 12000
 SCREEN_WIDTH, SCREEN_HEIGHT = 360, 240
 SHAPE_WIDTH, SHAPE_HEIGHT = 8, 8
 #X_MOVE, Y_MOVE = 1, 1
@@ -39,8 +39,6 @@ class MovingShape(pygame.sprite.Sprite):
         repainted()erased with black color."""         
         self.rect=self.rect.move(X_MOVE,Y_MOVE)
         
-
-  
 def main():
     """this function is called when the program starts.
        it initializes everything it needs, then runs in
@@ -68,18 +66,13 @@ def main():
     # creates a shape object from the MovingShape class
     shape_1=MovingShape(SHAPES_COLOR, SHAPE_WIDTH, SHAPE_HEIGHT)
     tail_list=[shape_1.rect]*250
-    
-    
-    # creates a sprite object
 
-    
     # main loop
     while True:
-        allsprites = pygame.sprite.Group(shape_1)
         # a clock keeps the frame rate to a fixed number
         clock.tick(NOMINAL_FRAME_RATE)
         frame_counter+=1
-        rect_0=shape_1.rect
+
         #move the shape 1 step
         shape_1.move_shape(X_MOVE,Y_MOVE)
         # reverse the shape when it colides with the screen walls       
@@ -89,8 +82,7 @@ def main():
         if rect_1.top < 0 or rect_1.bottom > SCREEN_HEIGHT:
             Y_MOVE = -Y_MOVE
             
-        utils.shift_buffer(tail_list, rect_1)
-#        print(tail_list)
+        utils.shift_buffer(tail_list, [rect_1.left,rect_1.top])
 
         """ displays the real frame rate which might be different
         from the nominal frame rate."""
@@ -100,18 +92,14 @@ def main():
                 # erase the last text with black color
                 text = font.render('Frame rate: {} fps'.format(str(round(frame_rate))), 1, (255,0,0))
                 frame_counter=0
-        allsprites.update()
+
         screen.blit(background, (0, 0))
         for key, value in enumerate(tail_list):
-            shape = MovingShape((0,(key*1),0), SHAPE_WIDTH, SHAPE_HEIGHT)
-            shape.rect=value
-            allsprites = pygame.sprite.Group(shape)
-            allsprites.draw(screen)
-        
- 
-        #Draw Everything
+#            shape = MovingShape((0,(key*1),0), SHAPE_WIDTH, SHAPE_HEIGHT)
+            rect=pygame.Rect(value[0],value[1], SHAPE_WIDTH, SHAPE_HEIGHT)
+            pygame.draw.rect(screen, (0,(key*1),0), rect)
 
-#        pygame.display.update(rect_0)
+        #Draw Everything
         screen.blit(text, textpos)
         pygame.display.update()
         
