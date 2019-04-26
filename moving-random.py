@@ -39,7 +39,12 @@ class MovingShape(pygame.sprite.Sprite):
         move, the previous position on the last frame is
         repainted()erased with black color."""         
         self.rect=self.rect.move(X_MOVE,Y_MOVE)
-        
+
+
+def trajectory_generator(lenght=100, random=False, screen_width, screen_height):
+    pass
+
+       
 def main():
     """this function is called when the program starts.
        it initializes everything it needs, then runs in
