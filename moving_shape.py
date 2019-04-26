@@ -14,7 +14,7 @@ from pygame.compat import geterror
 if not pygame.font: print ('Warning, fonts disabled')
 
 # game constants
-NOMINAL_FRAME_RATE = 12000
+NOMINAL_FRAME_RATE = 1200
 SCREEN_WIDTH, SCREEN_HEIGHT = 900, 600
 SHAPE_WIDTH, SHAPE_HEIGHT = 64, 64
 #X_MOVE, Y_MOVE = 1, 1
@@ -73,6 +73,7 @@ def main():
         # a clock keeps the frame rate to a fixed number
         clock.tick(NOMINAL_FRAME_RATE)
         frame_counter+=1
+        rect_0=shape_1.rect
         #move the shape 1 step
         shape_1.move_shape(X_MOVE,Y_MOVE)
         # reverse the shape when it colides with the screen walls       
@@ -94,9 +95,10 @@ def main():
 
         #Draw Everything
         screen.blit(background, (0, 0))
+        pygame.display.update(rect_0)
         screen.blit(text, textpos)
         allsprites.draw(screen)
-        pygame.display.update(textpos)
+        pygame.display.update([textpos, shape_1.rect])
         
         # handles the exit event
         for event in pygame.event.get():
